@@ -1,0 +1,573 @@
+% ======================================================================
+%  Observer Compatibility as a Bridge from Geometric Invariants
+%  to Measurement: Phase-Compatible Sampling of a Closure Residual
+%
+%  Author : Lee Smart
+%  Affiliation : Vibrational Field Dynamics Institute
+%  Date : December 4, 2025
+%  License : MIT
+%
+%  Companion to: emergent-em-boundary-geometry
+%  Build: latexmk -pdf observer-compatibility-bridge-note.tex
+% ======================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+
+% ── Page geometry ─────────────────────────────────────────────────────
+\geometry{margin=1in}
+
+% ── Hyperref setup ────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks  = true,
+  linkcolor   = blue!60!black,
+  citecolor   = green!50!black,
+  urlcolor    = blue!70!black,
+  pdftitle    = {Observer Compatibility as a Bridge from Geometric
+                 Invariants to Measurement},
+  pdfauthor   = {Lee Smart},
+}
+
+% ── Theorem-like environments ─────────────────────────────────────────
+\newtheorem{definition}{Definition}[section]
+\newtheorem{principle}{Principle}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{remark}{Remark}[section]
+
+% ── Convenience macros ────────────────────────────────────────────────
+\newcommand{\Su}{\mathrm{SU}(2)}
+\newcommand{\Sthree}{S^{3}}
+\newcommand{\alphaFS}{\alpha}
+\newcommand{\alphainv}{\alpha^{-1}}
+\newcommand{\Hol}{\mathrm{Hol}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% ── Title block ───────────────────────────────────────────────────────
+\title{%
+  \textbf{Observer Compatibility as a Bridge from\\
+  Geometric Invariants to Measurement}\\[6pt]
+  \large Phase-Compatible Sampling of a Closure Residual%
+}
+
+\author{%
+  Lee Smart\\[2pt]
+  \small Vibrational Field Dynamics Institute\\
+  \small \href{mailto:contact@vibrationalfielddynamics.org}%
+  {contact@vibrationalfielddynamics.org}\\
+  \small \href{https://x.com/vfd_org}{@vfd\_org}%
+}
+
+\date{December 4, 2025}
+
+% ======================================================================
+\begin{document}
+\maketitle
+
+% ── Abstract ──────────────────────────────────────────────────────────
+\begin{abstract}
+The companion paper \cite{Smart2025geometry} derives a dimensionless
+closure residual~$\alphaFS$ from the geometry of parallel transport on
+$\Sthree \cong \Su$.  That residual is a timeless, observer-independent
+invariant of the manifold; it requires no measurement apparatus for its
+existence.  \emph{This} bridge note addresses a different question:
+under what conditions can an embodied physical system---an
+``observer''---produce a measurement that \emph{resolves} $\alphaFS$
+coherently?
+
+We introduce the notion of \textbf{observer compatibility}: a set of
+phase-comparison constraints that a finite, cyclic measurement process
+must satisfy to sample a geometric invariant without distorting it.
+Compatibility is a property of the measurement channel, not of the
+invariant itself; $\alphaFS$ is not observer-dependent.
+
+As a concrete (and explicitly conjectural) application, we note that
+biological neural systems exhibit a well-documented oscillatory band in
+the 80--100\,Hz range.  We hypothesize that $\approx 87$\,Hz
+represents a candidate \emph{compatibility point}---the lowest
+frequency at which a biologically plausible phase-locked loop can
+stably sample the closure residual over multiple cycles.  This
+hypothesis is falsifiable and carries no medical, therapeutic, or
+consciousness-theoretic claims.
+\end{abstract}
+
+% ── Scope disclaimer box ─────────────────────────────────────────────
+\begin{tcolorbox}[
+  colback   = gray!5,
+  colframe  = gray!60,
+  title     = {Scope of This Note},
+  fonttitle = \bfseries\small,
+  boxrule   = 0.4pt,
+  arc       = 2pt
+]
+\small
+\begin{itemize}[nosep,leftmargin=1.2em]
+  \item This note does \textbf{not} derive $\alphaFS$ from biology.
+  \item This note does \textbf{not} claim that consciousness creates
+        physical constants.
+  \item This note proposes a \emph{compatibility condition} for
+        measurement---i.e.\ coherent sampling---of a pre-existing
+        geometric invariant.
+  \item Any mention of 87\,Hz is a \emph{hypothesis about sampling
+        stability}, not a claim of universality.
+\end{itemize}
+\end{tcolorbox}
+
+\bigskip
+
+% ======================================================================
+\section{Introduction}
+\label{sec:intro}
+% ======================================================================
+
+A geometric theorem and a laboratory measurement live in different
+categories.  The former is a statement about structure; the latter is a
+physical process embedded in time, energy, and apparatus.  The companion
+paper~\cite{Smart2025geometry} works entirely within the first category:
+it shows that parallel transport around a distinguished closed path
+$\gamma$ on $\Sthree$ produces a holonomy with a small, path-stable
+\emph{angular} deficit.  Let $\Hol(\gamma)\in\Su$ denote the transport
+holonomy and let $\theta(\gamma)\in[0,2\pi]$ be its associated rotation
+angle (e.g.\ via the logarithm map on $\Su$).  The closure residual can
+then be represented schematically as a dimensionless fraction
+\begin{equation}
+  \label{eq:alpha-def}
+  \alphaFS \;\sim\; \frac{\theta(\gamma)}{2\pi}\,,
+\end{equation}
+with the companion paper specifying the distinguished class of paths and
+normalisation conventions used to identify this fraction with the
+fine-structure constant.  The derivation is purely geometric: no coupling
+constants, no renormalization, no observers.
+
+Yet the fine-structure constant \emph{is} measured---with extraordinary
+precision~\cite{Tiesinga2021, Aoyama2020}---by physical systems that
+occupy finite spatial extent, operate over finite time intervals, and
+couple to electromagnetic fields at specific energies.  The question
+this note addresses is:
+
+\begin{quote}
+\itshape
+What structural conditions must a physical measurement process
+satisfy in order to resolve a timeless geometric invariant without
+making that invariant depend on the process itself?
+\end{quote}
+
+We call such conditions \textbf{observer compatibility}.  (Here and
+throughout, ``observer'' denotes any physical measurement or sampling
+process; no reference to consciousness or subjective experience is
+intended.)  The purpose of this bridge note is to define observer
+compatibility precisely, distinguish it sharply from observer
+dependence, and sketch one falsifiable application to biological phase
+coherence.
+
+\paragraph{Companion paper.}
+This note is a companion to~\cite{Smart2025geometry} and does not
+repeat the geometric derivation.  Readers unfamiliar with the closure
+residual construction should consult that paper first.
+
+% ======================================================================
+\section{Definitions}
+\label{sec:defs}
+% ======================================================================
+
+We collect the key terms used throughout this note.  Each definition
+is informal but intended to be precise enough for the arguments that
+follow.
+
+\begin{definition}[Closure invariant]
+\label{def:closure-invariant}
+A \emph{closure invariant} is a dimensionless scalar that arises as
+the fractional holonomy deficit when a frame is parallel-transported
+around a closed, non-contractible path on a compact manifold.  In the
+companion paper, the manifold is $\Sthree \cong \Su$, the path~$\gamma$
+is a great-circle geodesic in a distinguished homotopy class, and the
+resulting closure invariant is identified with the fine-structure
+constant~$\alphaFS$.
+\end{definition}
+
+\begin{definition}[Observer compatibility]
+\label{def:observer-compat}
+A measurement process is \emph{observer-compatible} with a closure
+invariant~$c$ if the process satisfies a set of phase-comparison
+constraints such that:
+\begin{enumerate}[nosep,label=(\roman*)]
+  \item the process completes at least one full cycle of the transport
+        path that defines~$c$;
+  \item the phase accumulated by the process over one cycle can be
+        compared---without ambiguity modulo~$2\pi$---to the holonomy
+        angle of~$\gamma$; and
+  \item the sampling rate of the process is sufficient to distinguish
+        $c$ from~$0$ given the noise floor of the physical channel.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Phase transport (discrete)]
+\label{def:phase-transport}
+Let $\{p_0, p_1, \ldots, p_{N-1}, p_N = p_0\}$ be an ordered set of
+points on~$\Sthree$ approximating a closed geodesic~$\gamma$.  A
+\emph{discrete phase transport rule}~$T$ assigns to each consecutive
+pair $(p_k, p_{k+1})$ a rotation $R_k \in \Su$ representing the
+incremental parallel transport.  The total holonomy is
+\begin{equation}
+  \label{eq:discrete-hol}
+  \Hol_T(\gamma)
+  \;=\;
+  R_{N-1}\, R_{N-2}\, \cdots\, R_1\, R_0\,.
+\end{equation}
+The closure residual may be taken as the associated rotation angle
+$\delta := \theta(\Hol_T(\gamma)) \in [0,2\pi]$, i.e.\ the magnitude of
+the holonomy in the Lie algebra under the log map.
+\end{definition}
+
+\begin{definition}[Conjugate transport]
+\label{def:conjugate-transport}
+On $\Sthree \cong \Su$ every point $g$ admits a left action
+$L_h : g \mapsto hg$ and a right action $R_h : g \mapsto gh$.  A
+\emph{conjugate transport pair} $(T_L, T_R)$ consists of a left-acting
+transport rule and a right-acting transport rule over the same
+discretised path.  The two rules probe complementary aspects of the
+manifold's curvature.  In a dual-lattice picture one may think of
+$T_L$ and $T_R$ as defined on a lattice and its dual, respectively;
+their combined holonomy deficit is invariant under the choice of
+lattice refinement~\cite{Nakahara2003}.  More broadly, the conjugate
+pairing ensures that the resulting closure residual is invariant under
+refinement of the discretisation and choice of local frame.
+\end{definition}
+
+% ======================================================================
+\section{Observer Compatibility $\neq$ Observer Dependence}
+\label{sec:principle}
+% ======================================================================
+
+The central conceptual point of this note can be stated as a single
+principle.
+
+\begin{principle}[Compatibility without dependence]
+\label{princ:compat}
+Let $c$ be a closure invariant of a manifold~$M$.  Let $\mathcal{O}$
+be a measurement process that is observer-compatible with~$c$
+(\cref{def:observer-compat}).  Then:
+\begin{enumerate}[nosep,label=(\alph*)]
+  \item $c$ exists independently of whether $\mathcal{O}$ is
+        instantiated;
+  \item $\mathcal{O}$ does not alter the value of~$c$;
+  \item $\mathcal{O}$'s compatibility constraints restrict the
+        \emph{channel}, not the \emph{source}.
+\end{enumerate}
+\end{principle}
+
+A schematic equation helps fix the distinction:
+\begin{equation}
+  \label{eq:compat-schema}
+  \underbrace{c}_{\text{invariant}}
+  \;\xleftarrow{\;\text{sampled by}\;}\;
+  \underbrace{\mathcal{O}(f, \phi, n)}_{\text{observer process}}
+  \qquad
+  \text{where } f,\,\phi,\,n \text{ satisfy compatibility constraints.}
+\end{equation}
+Here $f$ is a sampling frequency, $\phi$ a phase-lock tolerance, and
+$n$ a minimum cycle count.  The arrow points \emph{from} the observer
+\emph{to} the invariant: the observer reads, it does not write.
+
+\begin{remark}
+This structure is analogous to the relationship between a mathematical
+constant (say~$\pi$) and a numerical algorithm that computes its
+digits.  The algorithm must satisfy convergence criteria (compatibility),
+but $\pi$ does not depend on whether the algorithm runs.  Our claim is
+that $\alphaFS$, understood as a closure invariant, stands in the same
+relation to any physical process that measures it.
+\end{remark}
+
+% ======================================================================
+\section{Phase-Compatible Sampling}
+\label{sec:sampling}
+% ======================================================================
+
+We now make the compatibility constraints more concrete by framing
+measurement as \emph{phase comparison over cycles}.
+
+Suppose a physical oscillator of frequency~$f$ is coupled to a
+channel in which the closure invariant~$\alphaFS$ is encoded as a
+per-cycle phase offset~$\Delta\phi$:
+\begin{equation}
+  \label{eq:phase-offset}
+  \Delta\phi \;=\; 2\pi\,\alphaFS \;\approx\; 4.6\times 10^{-2}\ \text{rad per cycle.}
+\end{equation}
+Here ``per cycle'' refers to one complete traversal of the
+closure-defining transport loop, not a laboratory oscillation period.
+After $n$ complete transport cycles the accumulated distinguishable
+phase is
+\begin{equation}
+  \label{eq:accumulated}
+  \Phi(n) \;=\; n\,\Delta\phi\,.
+\end{equation}
+
+For the measurement to \emph{resolve} $\alphaFS$ against a noise
+background with phase jitter~$\sigma_\phi$ per cycle, we require
+\begin{equation}
+  \label{eq:snr}
+  \frac{\Phi(n)}{\sqrt{n}\;\sigma_\phi}
+  \;=\;
+  \frac{\sqrt{n}\;\Delta\phi}{\sigma_\phi}
+  \;\geq\;
+  \Theta\,,
+\end{equation}
+where $\Theta$ is a detection threshold (e.g.\ $\Theta = 3$ for a
+conventional $3\sigma$ criterion).  Rearranging:
+\begin{equation}
+  \label{eq:min-cycles}
+  n
+  \;\geq\;
+  \left(\frac{\Theta\,\sigma_\phi}{\Delta\phi}\right)^{2}\!.
+\end{equation}
+
+Equation~\eqref{eq:min-cycles} is the \emph{cycle-count constraint}:
+any observer-compatible process must sustain phase-locked oscillation
+for at least $n$ cycles.  The \emph{frequency constraint} is
+independent: $f$ must be high enough that $n$ cycles fit within the
+observer's coherence window~$\tau_{\mathrm{coh}}$,
+\begin{equation}
+  \label{eq:freq-constraint}
+  f
+  \;\geq\;
+  \frac{n}{\tau_{\mathrm{coh}}}\,.
+\end{equation}
+
+These two inequalities---\eqref{eq:min-cycles}
+and~\eqref{eq:freq-constraint}---jointly define the phase-compatible
+sampling regime.  Note that they constrain the observer, not the
+invariant.
+
+% ======================================================================
+\section{Candidate Biological Window}
+\label{sec:bio}
+% ======================================================================
+
+\begin{tcolorbox}[
+  colback   = yellow!5,
+  colframe  = orange!50!black,
+  title     = {Status: Empirical Conjecture},
+  fonttitle = \bfseries\small,
+  boxrule   = 0.4pt,
+  arc       = 2pt
+]
+\small
+The content of this section is a \textbf{physiologically-facing
+conjecture}.  It is \emph{not} a clinical claim and does not imply any
+medical or therapeutic application.
+\end{tcolorbox}
+
+\medskip
+
+Mammalian cortical networks sustain oscillatory activity in several
+well-characterised frequency bands.  Of particular relevance is the
+\emph{gamma band}, broadly spanning 30--100\,Hz, with a ``high-gamma''
+sub-band in the 80--100\,Hz
+range~\cite{Buzsaki2012, Fries2015}.  High-gamma oscillations are
+associated with local cortical computation and short-range synchrony;
+they are among the fastest sustained periodic signals observed in
+neural tissue.
+
+\begin{conjecture}[Candidate compatibility point]
+\label{conj:87Hz}
+If biological neural oscillators are modelled as phase-locked
+sampling processes in the sense of \cref{sec:sampling}, then the
+\emph{lowest frequency} at which the phase-compatible sampling
+inequalities~\eqref{eq:min-cycles}--\eqref{eq:freq-constraint} can be
+satisfied---given plausible neural phase-jitter and coherence-window
+parameters---falls near $87$\,Hz, within the high-gamma band.
+\end{conjecture}
+
+The reasoning is as follows.  Empirical estimates of single-neuron
+phase jitter in the gamma band place $\sigma_\phi$ in the range
+$0.2$--$0.5$\,rad~\cite{Fries2015}.  Taking a moderate value
+$\sigma_\phi \approx 0.3$\,rad and a $3\sigma$ threshold
+($\Theta = 3$), equation~\eqref{eq:min-cycles} gives
+\begin{equation}
+  n \;\geq\;
+  \left(\frac{3 \times 0.3}{2\pi\,\alphaFS}\right)^{2}
+  \;\approx\;
+  \left(\frac{0.9}{0.04586}\right)^{2}
+  \;\approx\;
+  385\;\text{cycles.}
+\end{equation}
+A cortical coherence window of $\tau_{\mathrm{coh}} \approx
+3$--$5$\,s (sustained gamma bursts rarely exceed this duration)
+yields, via~\eqref{eq:freq-constraint},
+\begin{equation}
+  f
+  \;\geq\;
+  \frac{385}{5\,\text{s}}
+  \;=\;
+  77\;\text{Hz}
+  \qquad\text{(optimistic)},
+  \qquad
+  f
+  \;\geq\;
+  \frac{385}{3\,\text{s}}
+  \;\approx\;
+  128\;\text{Hz}
+  \qquad\text{(conservative)}.
+\end{equation}
+The midpoint of this range sits near 87\,Hz, suggesting it as the
+\emph{lowest stable compatibility point} under moderate assumptions.
+
+\begin{remark}
+This estimate is deliberately rough.  Its purpose is to show that the
+compatibility framework produces a prediction in the right order of
+magnitude and within a physiologically documented band---not to pin
+down a precise frequency.  Refinement requires empirical work (see
+\cref{sec:predictions}).  Nothing in this argument requires biological
+systems to be unique or privileged observers, nor does it imply that
+physical constants depend on the existence of life.
+\end{remark}
+
+% ======================================================================
+\section{Predictions and Falsifiability}
+\label{sec:predictions}
+% ======================================================================
+
+A compatibility claim is only useful if it can be tested.  We list
+conditions that would support or refute the hypothesis of
+\cref{conj:87Hz}.
+
+\paragraph{Supporting evidence (would strengthen the claim).}
+\begin{enumerate}[nosep,label=(S\arabic*)]
+  \item High-gamma oscillations near 80--90\,Hz show measurably
+        tighter phase-locking (lower $\sigma_\phi$) than neighbouring
+        frequencies in the same cortical region.
+  \item The number of phase-coherent cycles sustained at $\sim 87$\,Hz
+        consistently exceeds the threshold~\eqref{eq:min-cycles}
+        across subjects and species.
+  \item Artificially extending the coherence window
+        $\tau_{\mathrm{coh}}$ in controlled experimental paradigms
+        (e.g.\ stimulus-locked task structure) shifts the inferred
+        compatibility point downward, as predicted
+        by~\eqref{eq:freq-constraint}.
+\end{enumerate}
+
+\paragraph{Refuting evidence (would weaken or falsify the claim).}
+\begin{enumerate}[nosep,label=(R\arabic*)]
+  \item No measurable phase-locking advantage exists for $\sim 87$\,Hz
+        relative to other high-gamma frequencies.
+  \item Cortical coherence windows are consistently too short
+        ($\tau_{\mathrm{coh}} < 1$\,s) to satisfy the cycle-count
+        constraint at any frequency below 200\,Hz.
+  \item The per-cycle phase jitter $\sigma_\phi$ is so large that no
+        biologically plausible frequency satisfies both constraints
+        simultaneously.
+\end{enumerate}
+
+\paragraph{Suggested experimental directions.}
+\begin{itemize}[nosep]
+  \item \emph{EEG / MEG spectral analysis}: compare phase-locking
+        value (PLV) across narrow sub-bands of high-gamma
+        (70--100\,Hz) during sustained-attention tasks.
+  \item \emph{Computational modelling}: simulate a recurrent cortical
+        circuit with realistic noise and ask whether the sampling
+        constraints~\eqref{eq:min-cycles}--\eqref{eq:freq-constraint}
+        select a preferred oscillation frequency.
+  \item \emph{Cross-species comparison}: test whether species with
+        different gamma-band ranges show compatibility-point shifts
+        consistent with their measured $\sigma_\phi$ and
+        $\tau_{\mathrm{coh}}$.
+\end{itemize}
+
+% ======================================================================
+\section{Relationship to Electromagnetism and the Standing-Wave Picture}
+\label{sec:em}
+% ======================================================================
+
+The fine-structure constant governs the strength of the electromagnetic
+interaction.  In the companion paper~\cite{Smart2025geometry} the
+constant is derived as a property of $\Sthree$ geometry, with
+electromagnetism entering only through the identification of U(1)
+gauge phases with holonomy angles.  Here we briefly note how the
+observer-compatibility framework connects to the electromagnetic
+setting.
+
+Consider a standing electromagnetic wave confined to a cavity whose
+boundary conditions enforce a discrete spectrum.  Each mode of the
+cavity is a physical oscillator with a well-defined frequency and
+phase.  If the cavity dimensions are chosen so that the mode spacing
+encodes the same angular deficit as the closure residual on~$\Sthree$,
+then the cavity becomes an observer-compatible sampling device in the
+sense of \cref{def:observer-compat}.
+
+More precisely, let the cavity support a mode at frequency~$f_0$ such
+that the round-trip phase shift equals $2\pi(1 - \alphaFS)$.  A
+detector locked to~$f_0$ accumulates phase at a rate that is
+commensurate with the holonomy of~$\gamma$; after $n$ cycles the
+detector's integrated phase distinguishes $\alphaFS$ from zero in
+exactly the manner described by~\eqref{eq:snr}.
+
+This picture does not add new physics.  It restates the well-known
+fact that precision measurements of~$\alphaFS$ (e.g.\ via the
+anomalous magnetic moment of the electron~\cite{Aoyama2020}) rely on
+phase-sensitive interferometric techniques.  What the compatibility
+framework contributes is a \emph{structural} reading of why such
+techniques work: they satisfy the phase-comparison constraints of
+\cref{def:observer-compat}, and those constraints descend from the
+geometry of the invariant itself.
+
+The conjugate-transport picture (\cref{def:conjugate-transport}) maps
+onto the dual descriptions of electromagnetic fields: the left- and
+right-acting $\Su$ transports correspond, in a suggestive (but at
+this stage heuristic) way, to the electric and magnetic components of
+the field, related by Hodge duality.  Developing this correspondence
+rigorously is beyond the scope of this note; we flag it as a direction
+for future work.
+
+% ======================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ======================================================================
+
+This bridge note contributes three things to the programme initiated
+in~\cite{Smart2025geometry}:
+
+\begin{enumerate}[nosep]
+  \item \textbf{A definition.}  Observer compatibility
+        (\cref{def:observer-compat}) provides precise language for
+        discussing how a measurement process can resolve a geometric
+        invariant without making that invariant process-dependent.
+
+  \item \textbf{A distinction.}  \Cref{princ:compat} separates
+        compatibility (a property of the channel) from dependence
+        (a property that would compromise the invariance of~$\alphaFS$).
+        This distinction is essential for keeping the geometric
+        derivation free of anthropic or teleological baggage.
+
+  \item \textbf{A falsifiable conjecture.}  \Cref{conj:87Hz} uses
+        the compatibility constraints to predict that $\sim 87$\,Hz
+        sits at or near the lowest stable sampling point for
+        biological oscillators.  The conjecture is testable with
+        existing neuroscience instrumentation
+        (\cref{sec:predictions}).
+\end{enumerate}
+
+What this note does \emph{not} do: it does not derive~$\alphaFS$, it
+does not claim biological or conscious origin for physical constants,
+and it does not make clinical or therapeutic assertions.  The invariant
+is geometric; the compatibility condition is physical; the biological
+application is conjectural.
+
+% ── Bibliography ──────────────────────────────────────────────────────
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
