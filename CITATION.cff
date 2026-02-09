@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: >-
+  Observer Compatibility as a Bridge from Geometric Invariants to Measurement:
+  Phase-Compatible Sampling of a Closure Residual
+message: >-
+  If you use or reference this work, please cite it using the metadata
+  from this file.
+type: software
+authors:
+  - given-names: Lee
+    family-names: Smart
+    email: contact@vibrationalfielddynamics.org
+    affiliation: Vibrational Field Dynamics Institute
+repository-code: https://github.com/vfd-org/vfd-observer-compatibility-bridge-note
+url: https://github.com/vfd-org/vfd-observer-compatibility-bridge-note
+license: MIT
+version: 1.0.0
+date-released: '2025-12-04'
+keywords:
+  - fine-structure constant
+  - geometric invariant
+  - observer compatibility
+  - phase-compatible sampling
+  - SU(2)
+  - closure residual
